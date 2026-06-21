@@ -93,7 +93,10 @@ body.locked .projects {
   gap: 2rem;
   align-items: center;
   z-index: 100;
+  transition: top 0.3s ease;
 }
+
+.site-nav.nav-hidden { top: -5rem !important; }
 
 .site-nav a {
   position: relative;
@@ -478,12 +481,18 @@ body.locked .projects {
     padding: 5rem 1.5rem 2rem;
   }
 
+  /* Fix specificity: override body.locked .hero padding-top for mobile */
+  body.locked .hero { padding-top: 5rem; }
+
   .hero-photo img { width: 180px; height: 180px; }
   .hero-bio { max-width: 100%; }
 
   /* Projects: unlock scroll, reset padding */
   body.locked { height: auto; overflow: auto; }
   body.locked .projects { padding: 5rem 1.5rem 2rem; }
+
+  /* Content pages: reduce top padding on mobile */
+  .content-page { padding: 5rem 1.5rem 2rem; }
 
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -520,11 +529,19 @@ body.locked .projects {
   .tile:hover .tile-front { opacity: 1; }
   .tile:hover .tile-back  { opacity: 1; transform: none; }
 
-  .site-nav { gap: 1.5rem; top: 15vh; }
+  .site-nav { gap: 1.5rem; top: 1.5rem; }
 }
 
 @media (max-width: 420px) {
   .projects-grid { grid-template-columns: 1fr; max-width: 320px; }
   .site-nav { gap: 1rem; }
   .site-nav a { font-size: 0.8rem; }
+}
+
+/* Short screens: landscape phones and small browser windows */
+@media (max-height: 500px) {
+  .site-nav { top: 1rem; }
+  body.locked .hero { padding-top: 3.5rem; }
+  body.locked .projects { padding-top: 3.5rem; }
+  .content-page { padding-top: 3.5rem; }
 }
